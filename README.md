@@ -10,6 +10,8 @@ Info API di listen pada 127.0.0.1:8080  pastikan jangan merubah port backend
 
 
 
+
+
 cara run frontend :
 
 - install nodejs
@@ -22,9 +24,11 @@ cara run frontend :
 
 
 
+
+
 Fitur frontend :
 
-- Hanya bisa membuat nomor antrian , insert data ,  dan melihat list data ( sesuai dengan soal yg di berikan )
+- Hanya bisa membuat nomor antrian, insert data, dan melihat list data sesuai dengan soal yg di berikan
 
 - Manual pagination konsep
 
@@ -32,11 +36,13 @@ Fitur frontend :
 
 
 
+
+
 Flow proses :
 
 - pasien mengambil tiket
 
-- setelah nomor angka dipanggil pasien ke bagian registrasi untuk mendaftarkan diri ( admin input data )
+- setelah nomor angka dipanggil pasien ke bagian registrasi untuk mendaftarkan lalu admin input data
 
 - setelah berhasil data akan masuk ke list data
 
