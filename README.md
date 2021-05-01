@@ -18,6 +18,8 @@ Info API di listen pada 127.0.0.1:8080  pastikan jangan merubah port backend
 
 - install angular cli terbaru
 
+- npm install  ( agar instal depedency )
+
 - jalankan perintah "ng serve" tanpa tanda petik
 
 - frontend akan berjalan pada port 4200
