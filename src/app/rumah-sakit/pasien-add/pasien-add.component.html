@@ -1,0 +1,128 @@
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <button [routerLink]="'/pasien-page'" type="button" class="btn btn-primary">BACK</button>
+        </div>
+
+        <div class="card-body">
+
+
+
+
+            <br>
+            <br>
+            <br>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <h3>Tambah pasien</h3>
+                        <div class="form-group">
+
+                            <input type="text" class="form-control" required [(ngModel)]="nama_pasien"
+                                placeholder="Nama pasien" [ngModelOptions]="{standalone: true}" /><br />
+
+                            <input type="text" class="form-control" (keypress)="numberOnly($event)" required
+                                [(ngModel)]="usia" placeholder="Usia" maxlength="3"
+                                [ngModelOptions]="{standalone: true}" /><br />
+
+                            <input type="text" class="form-control" required [(ngModel)]="alamat" placeholder="Alamat"
+                                [ngModelOptions]="{standalone: true}" /><br />
+
+
+
+                                <h5>Pilih Provinsi</h5>
+                                <select [(ngModel)]="var_id_provinsi" (change)="find_array_provinsi_get_id_kotakab()" class="form-control" [ngModelOptions]="{standalone: true}">
+                                   
+                                    <option *ngFor="let obj of provinsi_arr" [ngValue]="obj.id_provinsi">{{obj.value}} | ID : {{obj.id_provinsi}}</option>
+                                  </select><br />
+                          
+                                  <!-- {{provinsi}}
+
+
+
+
+                                <input type="text" class="form-control" required [(ngModel)]="provinsi"
+                                placeholder="provinsi" [ngModelOptions]="{standalone: true}" /><br /> -->
+
+                                
+                                <ng-container *ngIf="var_id_provinsi  else else_id_provinsi_error" >
+                                    <h5>Pilih Kota/Kab</h5>
+                                    <select [(ngModel)]="var_id_kotakab" (change)="find_array_provinsi_get_id_kotakab()" class="form-control" [ngModelOptions]="{standalone: true}">
+                                
+                                        <option *ngFor="let obj of kotakab_arr" [ngValue]="obj.id_kotakab">{{obj.value}} | ID : {{obj.id_kotakab}}</option>
+                                      </select><br />
+
+                                </ng-container>
+
+      
+                              
+                                <ng-container *ngIf="var_id_kotakab  else else_id_kotakab_error" >
+                                    <h5>Pilih Kecamatan</h5>
+                                    <select [(ngModel)]="var_id_kecamatan" (change)="find_array_kecamatan()" class="form-control" [ngModelOptions]="{standalone: true}">
+                                 
+                                        <option *ngFor="let obj of kecamatan_arr" [ngValue]="obj.id_kecamatan">{{obj.value}} | ID : {{obj.id_kecamatan}}</option>
+
+                                           <!-- <select [(ngModel)]="kecamatan" (change)="find_array_kecamatan()" class="form-control" [ngModelOptions]="{standalone: true}"> -->
+                                        <!-- <option *ngFor="let obj of kecamatan_arr" [ngValue]="obj.value">{{obj.value}} | ID : {{obj.id_kecamatan}}</option> -->
+                                      </select><br />
+
+                                </ng-container>
+
+
+
+
+
+
+
+                                <!-- <input type="text" class="form-control" required [(ngModel)]="kecamatan"
+                                placeholder="kecamatan" [ngModelOptions]="{standalone: true}" /><br /> -->
+
+          
+
+
+                                <!-- BPJS TRUE -->
+
+                                <h5>Pengguna BPJS</h5>
+                                <select [(ngModel)]="bpjs" class="form-control" [ngModelOptions]="{standalone: true}">
+                                    <option *ngFor="let obj of bpjs_arr" [ngValue]="obj.value">{{obj.string}}</option>
+                                  </select><br />
+                                <!-- <input type="text" class="form-control" required [(ngModel)]="bpjs"
+                                placeholder="bpjs" [ngModelOptions]="{standalone: true}" /><br /> -->
+
+                                
+
+                                <input type="text" class="form-control" required [(ngModel)]="poli"
+                                placeholder="Poli" [ngModelOptions]="{standalone: true}" /><br />
+
+
+
+
+                        </div>
+                        <!-- <div *ngIf="fileUploadProgress">
+                            Upload progress: {{ fileUploadProgress }}
+                        </div>
+                        <div class="image-preview mb-3" *ngIf="previewUrl">
+                            <img [src]="previewUrl" height="300" />
+                        </div>
+
+                        <div class="mb-3" *ngIf="uploadedFilePath">
+                            {{uploadedFilePath}}
+                        </div> -->
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" (click)="post_api_func_v2()">ADD</button>
+                            <!-- <button class="btn btn-primary" (click)="get_value_combo_by_id()">test</button> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>

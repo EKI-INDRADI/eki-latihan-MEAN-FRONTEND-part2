@@ -1,0 +1,285 @@
+<!-- <span *ngFor="let dataHTML of var_arr_data_slice; let i=index">
+    {{i+1}} <br>
+    {{dataHTML.image_preview}} <br>
+    {{dataHTML.description}} <br>
+    {{dataHTML.status}} <br>
+    {{dataHTML.price}} <br>
+    {{dataHTML.created_at}} <br>
+    {{dataHTML.updated_at}} <br>
+</span> -->
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            DAFTAR DATA PASIEN
+        </div>
+
+
+
+
+        <div class="card-body">
+
+            <form standalone>
+
+
+                <div class="input-group">
+                    <input type="text" required [(ngModel)]="var_search" placeholder="CARI NAMA PASIEN LALU ENTER"
+                        (keyup.enter)="get_api_func(0,1)" [ngModelOptions]="{standalone: true}" class="form-control">
+                    <!-- &nbsp;&nbsp;
+                    <span class="input-group-btn">
+                        <button type="button" (click)="get_api_func()" class="btn btn-primary">FIND</button>
+                    </span> -->
+                </div>
+
+
+            </form>
+
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+
+                        
+
+
+
+
+
+                        <!-----------------------------LOADING----------------------------------->
+
+<!-- <ng-container *ngIf="loading_get_data == 'DATA_NULL' ; else second">
+
+    <div align="center">
+        <h1>BELUM ADA DATA</h1><br/>
+        <img src="assets/img/errorv3.gif"  width="300"/>
+    </div>
+</ng-container>
+
+<ng-template #second><ng-container *ngIf="loading_get_data == 'DONT_LOADING'; else third"> -->
+
+    <div class="table-responsive">
+        <!-- class="table table-bordered"  id="dataTable" -->
+      <table  class="table table-striped table-bordered" id="dataTable"  width="100%" cellspacing="0">
+        <thead>
+                <tr>
+                  <th>NO</th>
+            
+                  <th>NAMA</th>
+                  <th>ALAMAT</th>
+                  <th>PROVINSI</th>
+                  <th>KOTA/KAB</th>
+                  <th>KECAMATAN</th>
+                  <th>BPJS</th>
+                  <th>POLI</th>
+                </tr>
+              </thead>
+              <!-- <tfoot>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Harga</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot> -->
+              <tbody>
+              
+         
+                <tr *ngFor="let dataHTML of arr_data; let i=index">
+                  <td >{{i+1}}</td>
+                  <td>{{dataHTML.nama_pasien}}</td>
+
+                  <td>{{dataHTML.alamat}}</td>
+                  <td>{{dataHTML.provinsi}}</td>
+                  <td>{{dataHTML.kotakab}}</td>
+                  <td>{{dataHTML.kecamatan}}</td>
+                  <td>{{dataHTML.bpjs}}</td>
+                  <td>{{dataHTML.poli}}</td>
+                </tr>
+            
+              </tbody>
+            </table>
+<!-- 
+            <span *ngFor="let page_data of  var_jumlah_halaman_arr_loop ; let x_index=index">
+          
+            <button (click)="get_api_func(limit*x_index)">{{x_index+1}}</button>
+         
+
+          </span> -->
+            <!-- <div class="container">
+              <ng-container *ngFor="let var-page-number of res_hasil; let i=index">
+                  <link rel='stylesheet' />{{i}}</link>
+                
+              
+              </ng-container>
+            </div> -->
+
+
+              <!-- <link rel='stylesheet' href="{{theme.url}}" *ngIf="currentTheme.name === theme.name" /> -->
+                <!-- <link  href="{{theme.url}}" *ngIf="currentTheme.name === theme.name" /> -->
+                <!-- <link rel='stylesheet'href="./+{{Number((var_send_halaman_aktif, 10)+1)}}" >&raquo;</link> -->
+                <!-- https://stackoverflow.com/questions/40219291/angular2-how-can-i-use-ngfor-for-set-url-in-the-tag-href-and-set-theme -->
+
+        </div>
+<!-- 
+
+</ng-container> 
+</ng-template>
+
+<ng-template #third><ng-container *ngIf="loading_get_data == 'LOADING'; else forth">
+    <div align="center">
+        <img src="assets/img/loading.gif"   width="300"/>
+    </div>
+</ng-container> </ng-template>
+
+<ng-template #forth><ng-container *ngIf="loading_get_data == 'ERROR'; else five">
+    <div align="center">
+        <img src="assets/img/errorv2.gif"  width="300"/>
+    </div>
+</ng-container> </ng-template>
+
+<ng-template #five>
+      <div align="center">
+        <img src="assets/img/error.gif"   width="300"/>
+    </div>
+</ng-template> -->
+<!-------------------------------------------------------------------------->
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <ng-container *ngIf="Jumlah_Halaman == 1  || Jumlah_Halaman == 0 else else_pagination">
+
+            </ng-container>
+
+            <ng-template #else_pagination>
+
+            <div align="right">
+
+                <div *ngIf="Jumlah_Halaman>1" class="label-info-pagination">
+                  <label class="c-grey fs-12 fw-500">Halaman {{var_halaman_aktif_number}} dari {{Jumlah_Halaman}} halaman,
+                    (Total
+                    data movie {{Jumlah_Data_Table}})</label>
+                </div>
+
+
+
+                <div class="btn-group" role="group" aria-label="Basic example" align="center">
+      
+                  <button type="button" (click)="page_first()" class="btn btn-secondary">
+                    First</button>
+      
+                  <button type="button" (click)="page_prev()" class="btn btn-secondary">
+                    &laquo;</button>
+      
+                  <ng-container *ngIf="var_halaman_aktif_number -2 < 1 ; else jika_bukan_2">
+      
+                  </ng-container>
+      
+                  <ng-template #jika_bukan_2>
+                    <button type="button" (click)="page_min2()" class="btn btn-secondary">
+                      {{var_halaman_aktif_number -2}}</button>
+                  </ng-template>
+      
+                  <ng-container *ngIf="var_halaman_aktif_number -1 < 1 ; else jika_bukan_1">
+      
+                  </ng-container>
+      
+                  <ng-template #jika_bukan_1>
+                    <button type="button" (click)="page_min1()" class="btn btn-secondary">
+                      {{var_halaman_aktif_number -1}}</button>
+                  </ng-template>
+      
+                  <button type="button" (click)="page_aktif()" class="btn btn-info">
+                    {{var_halaman_aktif_number}}</button>
+      
+                  <ng-container *ngIf="var_halaman_aktif_number + 1 > Jumlah_Halaman; else jika_1">
+      
+                  </ng-container>
+      
+                  <ng-template #jika_1>
+                    <button type="button" (click)="page_plus1()" class="btn btn-secondary">
+                      {{var_halaman_aktif_number +1}}</button>
+                  </ng-template>
+      
+      
+                  <ng-container *ngIf="var_halaman_aktif_number + 2 > Jumlah_Halaman; else jika_2">
+      
+                  </ng-container>
+      
+                  <ng-template #jika_2>
+                    <button type="button" (click)="page_plus2()" class="btn btn-secondary">
+                      {{var_halaman_aktif_number +2}}</button>
+                  </ng-template>
+      
+                  <button type="button" (click)="page_next()" class="btn btn-secondary">
+                    &raquo;</button>
+      
+                  <button type="button" (click)="page_last()" class="btn btn-secondary">
+                    Last</button>
+      
+                </div>
+      
+                <br>
+                <br>
+              </div>
+
+
+            </ng-template> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
